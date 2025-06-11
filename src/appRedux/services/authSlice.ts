@@ -19,7 +19,7 @@ const authService = {
         try {
             console.log(loginDetails, "loginDetails received");
 
-            const response: ApiResponse = await apiCall('POST', 'user/login', loginDetails);
+            const response: ApiResponse = await apiCall('POST', 'auth/login', loginDetails);
             return response.data;
         } catch (error: any) {
             console.error('Login failed:', error.data);

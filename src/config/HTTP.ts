@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 
 export const constApi = {
-    BACKEND_URL: 'https://api.plx99.com/v1/',
+    // BACKEND_URL: 'https://api.plx99.com/v1/',
+    BACKEND_URL: 'https://61ca-2402-e280-2302-98-6844-cb5e-5c64-7824.ngrok-free.app/v1/',
     // BACKEND_URL: 'https://api.tvs99.com/v1/',
     SOCKET_URL: 'https://api.tvs99.com/',
 };
@@ -20,10 +21,10 @@ function authHeader(): Record<string, string> {
 }
 
 export const apiCall = async (
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE', 
-    path: string, 
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    path: string,
     payload?: any
-)  => {
+) => {
     try {
         const response = await axios({
             method,
