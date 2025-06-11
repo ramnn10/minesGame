@@ -1,0 +1,155 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+
+.game-tile {
+    background-color: #2d3748;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    font-size: 2rem;
+}
+
+.game-tile:hover:not(.revealed):not(.disabled) {
+    transform: scale(1.05);
+    background-color: #4a5568;
+}
+
+.game-tile.gem {
+    background-color: #2f855a;
+    color: #c6f6d5;
+    animation: pop 0.3s ease-out;
+}
+
+.game-tile.mine {
+    background-color: #c53030;
+    color: #fed7d7;
+    animation: shake 0.5s ease;
+}
+
+.game-tile.revealed {
+    cursor: not-allowed;
+}
+
+.game-controls input,
+.game-controls select,
+.game-controls button {
+    border: 1px solid #4a5568;
+    background-color: #2d3748;
+    color: white;
+}
+
+.game-controls button:disabled {
+    background-color: #1a202c;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn-primary {
+    background-color: #2b6cb0;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #2c5282;
+}
+
+.btn-secondary {
+    background-color: #2f855a;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #276749;
+}
+
+.bet-input {
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.bet-input:focus {
+    outline: none;
+    border-color: #2b6cb0;
+}
+
+.bet-adjust-btn {
+    background-color: #4a5568;
+    color: white;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.bet-adjust-btn:hover {
+    background-color: #2b6cb0;
+}
+
+.bet-adjust-btn:disabled {
+    background-color: #2d3748;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.info-box {
+    background-color: #2d3748;
+    border-left: 4px solid #2b6cb0;
+}
