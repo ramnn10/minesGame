@@ -10,7 +10,7 @@ const GameRulesModal: React.FC<GameRulesModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="absolute top-0 left-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto h-[100%]">
-      <div className=" bg-[#212226] h-[-webkit-fill-available] rounded-lg shadow-xl text-white overflow-y-auto">
+      <div className=" bg-[#212226] h-[-webkit-fill-available] rounded-lg shadow-xl text-gray-300 font-[400] overflow-y-auto">
         <div className="p-2 border-b border-gray-700">
           <div className='flex justify-between items-center'>
             <h2 className="text-xl font-bold">GAME RULES</h2>
@@ -32,7 +32,7 @@ const GameRulesModal: React.FC<GameRulesModalProps> = ({ isOpen, onClose }) => {
             </p>
           </div>
 
-          <div className="space-y-3 text-sm p-2">
+          <div className="space-y-2 text-sm p-2">
             <p>
               A goal of the game is to reveal stars and avoid mines. With each revealed star, payout multiplier increases. Tiles can be revealed by selecting certain tile or clicking “pick randomply” button;
             </p>
@@ -47,7 +47,7 @@ const GameRulesModal: React.FC<GameRulesModalProps> = ({ isOpen, onClose }) => {
             GAME INTERFACE
           </p>
 
-          <div className="space-y-3 text-sm">
+          <div className="space-y-2 text-sm">
             <p>
               Bets can be made from the bet panel, by selecting predefined bet amounts, or entering your own. Click (-) and (+) buttons to move between bet options;
             </p>
@@ -64,7 +64,7 @@ const GameRulesModal: React.FC<GameRulesModalProps> = ({ isOpen, onClose }) => {
             AUTO PLAY
           </p>
 
-          <div className="space-y-3 text-sm">
+          <div className="space-y-2 text-sm">
             <p>
               Note: this feature might be unavailable in some casinos.
             </p>
@@ -86,12 +86,13 @@ const GameRulesModal: React.FC<GameRulesModalProps> = ({ isOpen, onClose }) => {
             ADDITIONAL INFORMATION
           </p>
 
-          <div className="space-y-3 text-sm">
+          <div className="space-y-2 text-sm">
             <p>
               In the event of a malfunction of the gaming hardware/software, all affected game bets and payouts are rendered void and all affected bets are refunded.
             </p>
-            <p>   If the internet connection is interrupted when the bet is active, the game will auto cash out with the current multiplier, and the winning amount will be added to your balance.   </p>
-            <p>  Auto play settings are activated by pressing “Auto Play” button, if tiles are selected on the board;  </p>
+            <p>
+              If the internet connection is interrupted when the bet is active, the game will auto cash out with the current multiplier, and the winning amount will be added to your balance.
+            </p>
           </div>
         </div>
 

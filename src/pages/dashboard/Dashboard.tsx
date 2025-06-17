@@ -3,6 +3,9 @@ import MenuModal from './MenuModal';
 import GameLimitsModal from './GameLimitsModal';
 import GameRulesModal from './GameRulesModal';
 import BetHistoryModal from './BetHistoryModal';
+import BetsButtonModal from './BetsButtonModal';
+import AutoPlayModal from './AutoPlayModal';
+import NumberPadModal from './NumberPadModal';
 
 const Dashboard: React.FC = () => {
     // Game Settings
@@ -22,6 +25,9 @@ const Dashboard: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const [messageType, setMessageType] = useState<'info' | 'success' | 'error'>('info');
     const [showMessage, setShowMessage] = useState<boolean>(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+    const [showNumberPad, setShowNumberPad] = useState(false);
 
     // Initialize mine count options
     const mineOptions = Array.from({ length: 24 }, (_, i) => i + 1);
@@ -176,16 +182,54 @@ const Dashboard: React.FC = () => {
         setActiveModal(null); // Close everything
     };
 
+    const handleGameAction = () => {
+        if (!gameActive) {
+            startGame();
+        } else {
+            // showMessage('Cashed out (not implemented yet)', 'info');
+            // resetUI();
+        }
+    };
+
+    const handleNumberClick = (num: number | string) => {
+        if (num === '✅') {
+            setShowNumberPad(false);
+            return;
+        }
+
+        const newValue = parseFloat(`${betAmount}${num}`);
+        if (newValue <= MAX_BET) {
+            setBetAmount(newValue);
+        }
+    };
+
+    const [isBetButton, setIsBetButton] = useState(false);
+
+    const handleBetButtons = () => {
+        setIsBetButton(!isBetButton);
+    };
+
+    const [isAutoPlay, setIsAutoPlay] = useState(false);
+
+    const handleAutoPlay = () => {
+        setIsAutoPlay(!isAutoPlay);
+    };
+
+    //    const handleBackspace = () => {
+    //     if (betAmount.length > 0) {
+    //       const newValue = betAmount.slice(0, -1);
+    //       setBetAmount(newValue === '' ? '0' : newValue);
+    //     }
+    //   };
 
 
     return (
         <>
-
             <div className="flex items-center justify-center min-h-screen bg-black w-full">
                 <div className="w-full max-w-[960px] mx-auto p-1 bg-[#1a202c]">
                     <div className="w-full bg-gradient-to-b from-[#0435a1] to-[#0a6ed1] border-2 border-yellow-500 rounded-xl shadow-xl text-white font-medium sm:w-full md:w-[90%] lg:w-[80%] xl:w-full mx-auto">
                         <div className='bg-[#024495] rounded-xl relative overflow-hidden'>
-                            <div className='flex justify-between items-center'>
+                            <div className='md:flex hidden justify-between items-center'>
 
                                 <div className='flex justify-start items-center space-x-2 m-1' >
                                     <div className='bg-[#0267A5] px-5 text-white rounded'>Mines</div>
@@ -203,7 +247,7 @@ const Dashboard: React.FC = () => {
                                         tabIndex={0}
                                         onKeyDown={(e) => e.key === 'Enter' && handleOpenMenu()}
                                     >
-                                        =
+                                        <img src='/images/icon-burger-menu.svg' alt="Home Icon" />
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +300,7 @@ const Dashboard: React.FC = () => {
                                         </button>
                                         <input
                                             type="number"
-                                            className="bet-input"
+                                            className=" text-black"
                                             value={betAmount}
                                             min={MIN_BET}
                                             max={MAX_BET}
@@ -328,6 +372,96 @@ const Dashboard: React.FC = () => {
                                     <p className="font-semibold">{message}</p>
                                 </div>
                             </div>
+
+                            <div className='bg-[#024495] p-3 w-full rounded-xl'>
+                                <div className='w-[60%] mx-auto'>
+                                    <div className='md:flex justify-between items-center gap-2'>
+
+                                        <div className='flex flex-col md:flex-row md:gap-1 justify-start items-center space-x-2 m-1 px-4 rounded-[20px] bg-[#0267A5] py-1' >
+                                            <div className=' flex flex-col items-center justify-center px-5 text-white rounded'>
+                                                <span className='text-[13px]'>
+                                                    Bet USD
+                                                </span>
+                                                <input
+                                                    type="number"
+                                                    value={betAmount}
+                                                    min={MIN_BET}
+                                                    max={MAX_BET}
+                                                    onChange={(e) => updateBetAmount(parseFloat(e.target.value))}
+                                                    onClick={() => setShowNumberPad(true)}
+                                                    disabled={gameActive}
+                                                    className="w-36 h-5 mx-2 rounded-lg bg-[#0000004d] border border-black text-white text-center focus:outline-none focus:border-black"
+                                                    id="bet-amount"
+                                                />
+                                            </div>
+                                            <div className='flex justify-end items-center gap-1'>
+                                                <button id="bet-decrease" className="w-8 h-8 flex items-center justify-center rounded-full shadow-md shadow-[#fff1cd33] bg-[#00000026] border-[1px] border-black/50 text-white font-bold text-xl hover:bg-blue-800 transition-colors disabled:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed">-</button>
+                                                <div
+                                                    onClick={() => handleBetButtons()}
+                                                    className="w-8 h-8 cursor-pointer flex items-center justify-center rounded-full shadow-md shadow-[#fff1cd33] bg-[#00000026] border-[1px] border-black/50 text-white font-bold text-xl hover:bg-blue-800 transition-colors">
+                                                    <img src='/images/icon-coin.svg' alt="Home Icon" />
+                                                </div>
+                                                <button id="bet-increase" className="w-8 h-8 flex items-center justify-center rounded-full shadow-md shadow-[#fff1cd33] bg-[#00000026] border-[1px] border-black/50 text-white font-bold text-xl hover:bg-blue-800 transition-colors disabled:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed">+</button>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div className='order-2 md:order-1 flex justify-start items-center w-full gap-2'>
+                                            {/* 
+                                        <div className="p-4 flex items-center justify-center rounded-full shadow-md shadow-[#fff1cd33] bg-[#00000026] border-[1px] border-black/50 text-white font-bold text-xl hover:bg-blue-800 transition-colors"> */}
+                                            <div>
+                                                <img
+                                                    onClick={() => handleAutoPlay()}
+                                                    src='/images/icon-auto-play.svg' alt="auto-play" className='cursor-pointer' />
+                                                {/* </div> */}
+                                            </div>
+                                            {/* Game Buttons */}
+                                            <div className="w-full order-1 md:order-2">
+                                                <button
+                                                    onClick={handleGameAction}
+                                                    disabled={isButtonDisabled}
+                                                    className={`w-full py-2 rounded-[20px] text-lg font-normal text-white transition-colors border-2 border-black shadow-md shadow-black  flex justify-between items-center px-2 ${gameActive
+                                                        ? 'bg-[radial-gradient(circle_at_50%_50%,#666,#333)]'
+                                                        : 'bg-[radial-gradient(circle_at_50%_50%,#61a503,#2d7500_94%)] hover:bg-green-700'} 
+                                                         ${isButtonDisabled ? 'disabled:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed' : ''}`}
+                                                >
+                                                    <span>
+                                                        <img src='/images/icon-play.svg' alt="play" />
+                                                    </span>
+                                                    <span>{gameActive ? 'CASHOUT' : 'BET'}</span>
+                                                    <span></span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* <div className='md:hidden flex  justify-between items-center'>
+
+                                <div className='flex justify-start items-center space-x-2 m-1' >
+                                    <div className='bg-[#0267A5] px-5 text-white rounded'>Mines</div>
+                                    <div className='flex justify-center items-center px-3 space-x-1 text-[13px] rounded-[12px] text-[#343a40] bg-[#F58D13]'>How to Play?</div>
+                                </div>
+                                <div className='flex justify-end items-center gap-2'>
+                                    <span className='text-[12px] text-white'>
+                                        1,0000.00 : USD
+                                    </span>
+                                    <div
+                                        ref={menuButtonRef}
+                                        onClick={handleOpenMenu}
+                                        className="bg-[#013480] flex justify-center items-center w-6 h-6 rounded-full cursor-pointer text-white"
+                                        role="button"
+                                        tabIndex={0}
+                                        onKeyDown={(e) => e.key === 'Enter' && handleOpenMenu()}
+                                    >
+                                        <img src='/images/icon-burger-menu.svg' alt="Home Icon" />
+                                    </div>
+                                </div>
+                            </div> */}
+
                             {activeModal === 'menu' && (
                                 <MenuModal
                                     onClose={handleCloseAllModals}
@@ -339,6 +473,21 @@ const Dashboard: React.FC = () => {
                             <GameLimitsModal isOpen={activeModal === 'gameLimits'} onClose={handleCloseAllModals} />
                             <GameRulesModal isOpen={activeModal === 'gameRules'} onClose={handleCloseAllModals} />
                             <BetHistoryModal isOpen={activeModal === 'betHistory'} onClose={handleCloseAllModals} />
+                            <BetsButtonModal
+                                isOpen={isBetButton}
+                                onClose={() => setIsBetButton(false)}
+                            />
+                            <AutoPlayModal
+                                isOpen={isAutoPlay}
+                                onClose={() => setIsAutoPlay(false)}
+                            />
+                            {/* {showNumberPad && (
+                                <NumberPadModal
+                                    // onBackspace={handleBackspace}
+                                   
+                                // onNumberClick={handleNumberClick}
+                                />
+                            )} */}
                         </div>
                     </div>
                 </div>
