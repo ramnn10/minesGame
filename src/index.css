@@ -17,3 +17,10 @@ code {
 
 
 .scroll-hide::-webkit-scrollbar{display: none;}
+
+/* .bg-bomb-image {
+  background-image: url('/images/mines-bomb.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */

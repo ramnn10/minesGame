@@ -49,7 +49,7 @@ const AutoPlayModal: React.FC<AutoPlayModalProps> = ({ isOpen, onClose }) => {
             <h3 className="font-[400] text-[15px]">AUTO PLAY</h3>
             <button
               onClick={onClose}
-              className="text-white hover:text-gray-300 text-2xl"
+              className="text-white hover:text-gray-300 text-xl bg-[#373e48] w-[22px] h-[22px] flex justify-center items-center rounded-full"
             >
               ×
             </button>
@@ -134,10 +134,10 @@ const AutoPlayModal: React.FC<AutoPlayModalProps> = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          <div className="my-3 flex justify-center items-center">
+          <div className="my-2 flex justify-center items-center">
             <button
               onClick={() => setShowMoreOptions(!showMoreOptions)}
-              className="text-white text-[12px] text-sm font-[400] bg-[#393b3f] px-3 py-1.5 rounded-[12px]"
+              className="text-white text-[11px] text-sm font-[400] bg-[#393b3f] px-3 py-1 rounded-[12px]"
             >
               More options {showMoreOptions ? '▲' : '▼'}
             </button>
@@ -295,8 +295,9 @@ const AutoPlayModal: React.FC<AutoPlayModalProps> = ({ isOpen, onClose }) => {
 
         </div>
 
-        <div className="w-full border-t border-[#ffffff1a] py-4 px-2">
-          <button className="w-full bg-[radial-gradient(circle_at_50%_50%,#61a503,#2d7500_94%)] hover:opacity-90 text-white py-3 rounded-[20px] font-medium">
+        <div className="w-full border-t border-white/10 py-4 px-2">
+          <button
+            className=" w-full h-[50px] py-3 rounded-[20px] bg-[radial-gradient(circle_at_50%_50%,#61a503,#2d7500_94%)]  text-white text-sm font-medium shadow-[3px_3px_6px_#020b1a80,inset_-1px_-1px_#00000052,inset_1px_1px_#fff1cd33] border-2 border-black  hover:opacity-90 cursor-pointer    select-none text-center align-middle transition-all  duration-150 ease-in-out relative">
             START AUTO
           </button>
         </div>
