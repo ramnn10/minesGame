@@ -249,7 +249,7 @@ const Dashboard: React.FC = () => {
                             }}
                         >
 
-                            <div className='md:flex hidden justify-between items-center bg-[#0000004d]'>
+                            <div className='md:flex hidden justify-between items-center bg-[#0000004d] px-1'>
 
                                 <div className='flex justify-start items-center space-x-2 m-1' >
                                     {/* <div className='bg-[#0267A5] px-5 text-white rounded'>Mines</div> */}
@@ -262,17 +262,17 @@ const Dashboard: React.FC = () => {
                                 </div>
                                 <div className='flex justify-end items-center gap-2'>
                                     <span className='text-[12px] text-white'>
-                                        1,0000.00 : USD
+                                        3,000.00 : USD
                                     </span>
                                     <div
                                         ref={menuButtonRef}
                                         onClick={handleOpenMenu}
-                                        className="bg-[#013480] flex justify-center items-center w-6 h-6 rounded-full cursor-pointer text-white"
+                                        className="bg-[#0267a5] flex justify-center items-center w-6 h-6 rounded-full cursor-pointer text-white"
                                         role="button"
                                         tabIndex={0}
                                         onKeyDown={(e) => e.key === 'Enter' && handleOpenMenu()}
                                     >
-                                        <img src='/images/icon-burger-menu.svg' alt="Home Icon" />
+                                        <img src='/images/icon-burger-menu.svg' alt="Menu Icon" />
                                     </div>
                                 </div>
                             </div>
@@ -288,7 +288,7 @@ const Dashboard: React.FC = () => {
 
                                             <select
                                                 id="mine-count"
-                                                className="w-[120px] px-[3px] py-[1px] rounded-[20px] text-white text-[15px] bg-[#0267a5] hover:bg-[#02578c] border-[#0267a5]"
+                                                className="w-[120px] px-[3px] py-[1px] rounded-[20px] text-white text-[15px] bg-[#0267a5] hover:bg-[#02578c] border-[1px] border-[#00000080] shadow shadow-[#fff1cd33] "
                                                 value={mineCount}
                                                 onChange={(e) => setMineCount(parseInt(e.target.value))}
                                                 disabled={gameActive}
